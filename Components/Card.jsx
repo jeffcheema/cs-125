@@ -1,3 +1,5 @@
+import { Card, Title, Paragraph } from "react-native-paper";
+
 const CreateCard = () => {
   return (
     <Card style={Styles.container}>

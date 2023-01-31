@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
-import { Card, Title, Paragraph } from "react-native-paper";
+
+import { StyleSheet } from "react-native";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AuthProvider } from "./Providers/AuthProvider";
-import { NavigationContainer } from "@react-navigation/native";
-import Login from "./Views/Login";
-import SignUp from "./Views/Signup";
+
 import Navigation from "./Navigation";
 
 export default function App() {
