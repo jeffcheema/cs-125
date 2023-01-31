@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import Login from "./Views/Login";
 import SignUp from "./Views/Signup";
+import Dashboard from "./Views/Dashboard";
 
 const Navigation = () => {
   const Tab = createBottomTabNavigator();
@@ -11,6 +12,7 @@ const Navigation = () => {
       <Tab.Navigator>
         <Tab.Screen name="Login" component={Login} />
         <Tab.Screen name="SignUp" component={SignUp} />
+        <Tab.Screen name="Dashboard" component={Dashboard} />
       </Tab.Navigator>
     </NavigationContainer>
   );

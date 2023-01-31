@@ -1,3 +1,4 @@
+import { Button, StyleSheet } from "react-native";
 import { Card, Title, Paragraph } from "react-native-paper";
 
 const CreateCard = () => {
@@ -27,3 +28,4 @@ const Styles = StyleSheet.create({
     margin: 37,
   },
 });
+export default CreateCard;
