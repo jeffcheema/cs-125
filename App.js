@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
-// import tab navigator
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Login from "./Views/Login";
-import SignUp from "./Views/Signup";
-import { NavigationContainer } from "@react-navigation/native";
-import { AuthProvider } from "./Providers/AuthProvider";
+import { Card, Title, Paragraph } from "react-native-paper";
 
 export default function App() {
   const [username, setUsername] = useState("");
@@ -27,3 +22,35 @@ export default function App() {
     </AuthProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  header: {
+    top: 200,
+    position: "absolute",
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  blue: {
+    color: "#1DA1F2",
+  },
+  label: {
+    fontSize: 20,
+    paddingBottom: 10,
+    fontWeight: "bold",
+  },
+  input: {
+    borderWidth: 1,
+    width: "70%",
+    padding: 10,
+    marginBottom: 30,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  login: {
+    backgroundColor: "#1DA1F2",
+  },
+});
