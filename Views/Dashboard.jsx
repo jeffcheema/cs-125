@@ -6,9 +6,9 @@ import CreateCard from "../Components/Card";
 const Dashboard = () => {
   [movies, setMovies] = useState([]);
 
-  useEffect(async () => {
+  const getMovies = async () => {
 
-    console.log('')
+    // console.log('')
 
     const config = {
       headers: {
@@ -22,9 +22,14 @@ const Dashboard = () => {
       }
     }
 
-    axios.get('https://api-gate2.movieglu.com/filmsNowShowing/?n=10', config).then((response) => {
+    axios.get('https://api-gate2.movieglu.com/filmsNowShowing/?n=5', config).then((response) => {
       console.log(response);
     });
+  };
+
+  useEffect(() => {
+    const movies = getMovies();
+    console.log(movies);
   }, []);
 
   return (
