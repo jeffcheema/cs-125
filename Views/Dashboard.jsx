@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import CreateCard from "../Components/Card";
 
 const Dashboard = () => {
   [movies, setMovies] = useState([]);
 
   useEffect(async () => {
+
+    console.log('')
+
     const config = {
       headers: {
         'client': 'MOVI_162',
