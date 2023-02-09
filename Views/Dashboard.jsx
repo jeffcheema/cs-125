@@ -11,6 +11,9 @@ const Dashboard = () => {
     // console.log('')
 
     const config = {
+      params: {
+        n: 2
+      },
       headers: {
         'client': 'MOVI_162',
         'x-api-key': 'Y38wpjAaP566ppQwom80J207PBbha4Da2neKmR5S',
@@ -18,24 +21,38 @@ const Dashboard = () => {
         'territory': 'XX',
         'api-version': 'v200',
         'geolocation': '-22.0; 14.0',
-        'device-datetime': '2023-02-04T07:11:53.637Z'
+        'device-datetime': (new Date()).toISOString()
       }
     }
-
-    axios.get('https://api-gate2.movieglu.com/filmsNowShowing/?n=5', config).then((response) => {
-      console.log(response);
+    console.log("Line 27");
+    axios.get('https://api-gate2.movieglu.com/filmsNowShowing', config).then((response) => {
+      if (response) {
+        console.log(response?.data?.films);
+        setMovies(response?.data?.films);
+      } 
+    
     });
   };
 
   useEffect(() => {
-    const movies = getMovies();
-    console.log(movies);
+    return () => {
+      const movies = getMovies();
+      
+    }
   }, []);
 
   return (
     <View style={styles.container} styler>
-      <CreateCard />
-      <Text>{movies}</Text>
+      {/* <CreateCard /> */}
+      {movies?.map(({film_name}, index)=>{
+       <>
+       <Text>Movie #{index}</Text>
+       <Text>{film_name}</Text>
+
+       </>
+       
+
+      })}
     </View>
   );
 };
