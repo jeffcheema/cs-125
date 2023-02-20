@@ -1,16 +1,37 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { useAuth } from "../Providers/AuthProvider";
 
 export default function SignUp() {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const { signUp: signUpCallback } = useAuth();
+
+  const handleSignUp = async () => {
+    try {
+      await signUpCallback({ username, password, confirmPassword });
+    } catch (error) {
+      setError(error.message);
+    }
+  };
   return (
     <View style={styles.container} styler>
       <Text style={styles.header}>
-        <Text style={styles.blue}>MOVIE</Text>MATCHR
+        <Text style={styles.blue}>MOVIE</Text>MATCHR SIGN UP
       </Text>
-
+      <Text style={styles.label}>
+        Full<Text style={styles.blue}>Name</Text>
+      </Text>
+      <TextInput
+        style={styles.input}
+        value={name}
+        onChangeText={setName}
+        placeholder="Bob Ross"
+      />
       <Text style={styles.label}>
         User<Text style={styles.blue}>name</Text>
       </Text>
@@ -30,8 +51,22 @@ export default function SignUp() {
         onChangeText={setPassword}
         placeholder="Password"
       />
-
-      <Button style={styles.signup} title="signup" color="#1DA1F2" />
+      <Text style={styles.label}>
+        Confirm <Text style={styles.blue}>Password</Text>
+      </Text>
+      <TextInput
+        style={styles.input}
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
+        placeholder="Password"
+      />
+      <Text style={styles.error}>{error}</Text>
+      <Button
+        style={styles.signup}
+        title="signup"
+        color="#1DA1F2"
+        onPress={handleSignUp}
+      />
       <StatusBar style="auto" />
     </View>
   );
@@ -44,6 +79,9 @@ const styles = StyleSheet.create({
   },
   blue: {
     color: "#1DA1F2",
+  },
+  error: {
+    color: "red",
   },
   label: {
     fontSize: 20,
@@ -58,5 +96,6 @@ const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", alignItems: "center" },
   signup: {
     backgroundColor: "#1DA1F2",
+    borderWidth: 1,
   },
 });

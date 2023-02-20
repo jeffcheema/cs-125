@@ -9,7 +9,7 @@ const Dashboard = () => {
   const getMovies = async () => {
     const config = {
       params: {
-        n: 2,
+        n: 10,
       },
       headers: {
         client: "MOVI_162",
@@ -31,22 +31,21 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    return () => {
-      getMovies();
-    };
+    getMovies();
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text>Hello</Text>
       {movies && (
         <FlatList
           data={movies}
           renderItem={({ index, item }) => {
             return (
               <MovieCard
+                key={item.film_name}
                 id={index}
                 title={item.film_name}
-                uri={item.images.still[1].medium.film_image}
                 synopsis={item.synopsis_long}
               />
             );
