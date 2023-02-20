@@ -1,19 +1,19 @@
 import { Button, StyleSheet } from "react-native";
 import { Card, Title, Paragraph } from "react-native-paper";
 
-const CreateCard = () => {
+const MovieCard = ({ id, uri, title, synopsis }) => {
   return (
-    <Card style={Styles.container}>
+    <Card style={styles.container}>
       <Card.Content>
-        <Title>Geeks For Geeks</Title>
+        <Title>{title}</Title>
       </Card.Content>
       <Card.Cover
         source={{
-          uri: "https://media.geeksforgeeks.org/wp-content/uploads/20220217151648/download3-200x200.png",
+          uri,
         }}
       />
       <Card.Content>
-        <Paragraph>A Computer Science portal for Geeks</Paragraph>
+        <Paragraph>{synopsis}</Paragraph>
       </Card.Content>
       <Card.Actions>
         <Button title="Add to Favourites"></Button>
@@ -22,10 +22,12 @@ const CreateCard = () => {
   );
 };
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
+    width: 350,
     alignContent: "center",
     margin: 37,
   },
 });
-export default CreateCard;
+
+export default MovieCard;

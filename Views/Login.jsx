@@ -13,7 +13,7 @@ export default function Login() {
   };
   return (
     <View style={styles.container} styler>
-      <Text>{currentUser?.username || "Not logged in"}</Text>
+      {/* <Text>{currentUser?.username || "Not logged in"}</Text> */}
       <View style={styles.loginContainer}>
         <Text style={styles.header}>
           <View style={styles.inputLabel}>
