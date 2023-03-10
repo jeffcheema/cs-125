@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { SafeAreaView, StyleSheet, Text, FlatList } from "react-native";
 import MovieCard from "../Components/MovieCard";
+import genreList from '../genreList';
 
 const Dashboard = () => {
   const [movies, setMovies] = useState([]);
@@ -14,8 +15,8 @@ const Dashboard = () => {
       .get(queryURL)
       .then((response) => {
         if (response) {
-          console.log('RESPONSE:');
-          console.log(response);
+          // console.log('RESPONSE:');
+          return response.data.results[0].genre_ids.map(g => genreList[g]);
         }
         // console.log(`Genre IDs for "${title}" are:` + response?.results?[0].genre_ids.toString());
       });
@@ -53,7 +54,11 @@ const Dashboard = () => {
     // console.log('================================================================');
     // console.log('movie genres:');
     // console.log(movieGenres);
-    getGenres('Raiders of the Lost Ark');
+    console.log('movies @ 3:26pm: =========================');
+    console.log(movies);
+    movieGenres = movies.map(m => getGenres(m.film_name));
+    console.log(' genres @ 3:26pm: ===========================');
+    console.log(movieGenres);
   }, []);
 
   return (
