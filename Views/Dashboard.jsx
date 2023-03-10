@@ -10,7 +10,7 @@ const Dashboard = () => {
   const getGenres = async (title) => {
     
     const queryURL = `https://api.themoviedb.org/3/search/movie?api_key=787aa7caa3041935938721201617c6e7&language=en-US&query=${encodeURIComponent(title)}&page=1&include_adult=false`
-    console.log('getGenres was called with ' + title + 'and the queryURL is' + queryURL);
+    console.log('getGenres was called with ' + title);
     axios
       .get(queryURL)
       .then((response) => {
@@ -54,10 +54,10 @@ const Dashboard = () => {
     // console.log('================================================================');
     // console.log('movie genres:');
     // console.log(movieGenres);
-    console.log('movies @ 3:26pm: =========================');
+    console.log('movies @ 3:38pm: =========================');
     console.log(movies);
-    movieGenres = movies.map(m => getGenres(m.film_name));
-    console.log(' genres @ 3:26pm: ===========================');
+    movieGenres = movies.map(m => m.film_name);
+    console.log(' genres @ 3:38pm: ===========================');
     console.log(movieGenres);
   }, []);
 
