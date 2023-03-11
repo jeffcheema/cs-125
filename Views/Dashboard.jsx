@@ -47,24 +47,14 @@ const Dashboard = () => {
         if (response) {
           setMovies(response.data.films);
           const genres = response.data.films.map(movie => movie.imdb_title_id);
-          // console.log('genres:');
-          // console.log(genres);
+          console.log('genres:');
+          console.log(genres);
         }
       });
   };
 
   useEffect(() => {
     getMovies();
-    
-    if (movies) {
-      console.log('movies:');
-      console.log(movies);
-      const genres = movies.map(movie => movie.imdb_title_id);
-      console.log('genres is:');
-      console.log(genres);
-    }
-    
-    // getGenres('tt0082971');
   }, []);
 
   return (
