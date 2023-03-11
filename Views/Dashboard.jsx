@@ -6,6 +6,25 @@ import MovieCard from "../Components/MovieCard";
 const Dashboard = () => {
   const [movies, setMovies] = useState([]);
 
+  const getGenres = async (id) => {
+    const options = {
+      method: 'GET',
+      url: 'https://imdb8.p.rapidapi.com/title/get-genres',
+      params: {tconst: id },
+      headers: {
+        'X-RapidAPI-Key': '90224ad231mshaff18bd567df6d8p15939fjsn3c6d59f23d8f',
+        'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
+      }
+    };
+    
+    axios.request(options).then(function (response) {
+      console.log('getGenres() called and the RapidAPI response is:');
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+  };
+
   const getMovies = async () => {
     const config = {
       params: {
@@ -26,12 +45,14 @@ const Dashboard = () => {
       .then((response) => {
         if (response) {
           setMovies(response?.data?.films);
+          // console.log(response.data.films);
         }
       });
   };
 
   useEffect(() => {
     getMovies();
+    getGenres('tt0082971');
   }, []);
 
   return (
