@@ -23,11 +23,7 @@ const MovieForm = () => {
   const questions = [
     {
       question: 'What is your favorite movie genre?',
-      choices: ['Action', 'Comedy']
-    },
-    {
-      question: 'Do you prefer to watch movies at home or in the theater?',
-      choices: ['Home', 'Theater']
+      choices: ['Action', 'Comedy', '']
     },
     {
       question: 'Do you prefer to watch movies in English or with subtitles?',

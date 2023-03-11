@@ -52,7 +52,14 @@ const Dashboard = () => {
   };
 
   const filterByGenre = () => {
-
+    const genreList = movies.map(movie => getGenres(movie.imdb_title_id));
+    const overlappingCount = genreList.map(genres => {
+      const gSet = new Set(genres);
+      const userPreferences = new Set(currentUser.preferredGenres);
+      const intersect = new Set([...gSet].filter(i => userPreferences.has(i)));
+      return intersect.length;
+    });
+    movies.sort();
   };
 
   const getMovies = async () => {
