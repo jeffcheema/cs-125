@@ -18,8 +18,9 @@ const Dashboard = () => {
     };
     
     axios.request(options).then(function (response) {
-      console.log('getGenres() called and the RapidAPI response is:');
-      console.log(response.data);
+      // console.log('getGenres() called and the RapidAPI response is:');
+      // console.log(response.data);
+      return response.data;
     }).catch(function (error) {
       console.error(error);
     });
@@ -44,15 +45,26 @@ const Dashboard = () => {
       .get("https://api-gate2.movieglu.com/filmsNowShowing", config)
       .then((response) => {
         if (response) {
-          setMovies(response?.data?.films);
-          // console.log(response.data.films);
+          setMovies(response.data.films);
+          const genres = response.data.films.map(movie => movie.imdb_title_id);
+          // console.log('genres:');
+          // console.log(genres);
         }
       });
   };
 
   useEffect(() => {
     getMovies();
-    getGenres('tt0082971');
+    
+    if (movies) {
+      console.log('movies:');
+      console.log(movies);
+      const genres = movies.map(movie => movie.imdb_title_id);
+      console.log('genres is:');
+      console.log(genres);
+    }
+    
+    // getGenres('tt0082971');
   }, []);
 
   return (
