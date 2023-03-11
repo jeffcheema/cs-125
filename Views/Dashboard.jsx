@@ -7,21 +7,19 @@ import genreList from '../genreList';
 const Dashboard = () => {
   const [movies, setMovies] = useState([]);
 
-  const getGenres = async (title) => {
+  // const getGenres = async (title) => {
     
-    const queryURL = `https://api.themoviedb.org/3/search/movie?api_key=787aa7caa3041935938721201617c6e7&language=en-US&query=${encodeURIComponent(title)}&page=1&include_adult=false`
-    console.log('getGenres was called with ' + title);
-    axios
-      .get(queryURL)
-      .then((response) => {
-        if (response) {
-          // console.log('RESPONSE:');
-          return response.data.results[0].genre_ids.map(g => genreList[g]);
-        }
-        // console.log(`Genre IDs for "${title}" are:` + response?.results?[0].genre_ids.toString());
-      });
-
-  }
+  //   const queryURL = `https://api.themoviedb.org/3/search/movie?api_key=787aa7caa3041935938721201617c6e7&language=en-US&query=${encodeURIComponent(title)}&page=1&include_adult=false`
+  //   console.log('getGenres was called with ' + title);
+  //   axios
+  //     .get(queryURL)
+  //     .then((response) => {
+  //       if (response) {
+  //         console.log('RESPONSE:');
+  //         console.log(response.data.results[0].genre_ids.map(g => genreList[g]));
+  //       }
+  //     });
+  // };
 
   const getMovies = async () => {
     const config = {
@@ -42,7 +40,7 @@ const Dashboard = () => {
       .get("https://api-gate2.movieglu.com/filmsNowShowing", config)
       .then((response) => {
         if (response) {
-          console.log(response?.data?.films);
+          // console.log(response?.data?.films);
           setMovies(response?.data?.films);
         }
       });
@@ -54,11 +52,11 @@ const Dashboard = () => {
     // console.log('================================================================');
     // console.log('movie genres:');
     // console.log(movieGenres);
-    console.log('movies @ 3:38pm: =========================');
+    console.log('movies: =========================');
     console.log(movies);
-    movieGenres = movies.map(m => m.film_name);
-    console.log(' genres @ 3:38pm: ===========================');
-    console.log(movieGenres);
+    // movieGenres = movies.map(m => m.film_name);
+    // console.log(' genres @ 3:46pm: ===========================');
+    // console.log(movieGenres);
   }, []);
 
   return (
