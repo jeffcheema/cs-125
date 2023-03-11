@@ -39,14 +39,12 @@ const Dashboard = () => {
         } else {
           return false;
         }
-      } else if (!temperature) {
+      } else {
         if (!currentUser.weatherPreference && movie.rating == 'PG-13' && movie.rating == 'R') {
           return true;
         } else {
           return false;
         }
-      } else {
-        return true;
       }
     });
     console.log('movies after weather filtering:');
