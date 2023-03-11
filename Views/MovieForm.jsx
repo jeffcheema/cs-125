@@ -1,14 +1,23 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 
-const Question = ({ question, choices, onPress }) => {
+const Question = ({ question, choices, onPress, selected }) => {
   return (
     <View style={styles.questionContainer}>
       <Text style={styles.questionText}>{question}</Text>
       {choices.map((choice, index) => (
         <TouchableOpacity
           key={index}
-          style={styles.choiceButton}
+          style={[
+            styles.choiceButton,
+            selected === choice && styles.selectedButton,
+          ]}
           onPress={() => onPress(choice)}
         >
           <Text style={styles.choiceText}>{choice}</Text>
@@ -18,16 +27,17 @@ const Question = ({ question, choices, onPress }) => {
   );
 };
 
-const handleSubmit = async () => {
-  try {
-    await signUpCallback({ username, password, confirmPassword });
-  } catch (error) {
-    setError(error.message);
-  }
-};
-
-const MovieForm = ({ username, password, confirmPassword }) => {
-  const [answers, setAnswers] = useState({});
+const MovieForm = ({
+  moviePreferences: answers,
+  setMoviePreferences: setAnswers,
+  callback,
+}) => {
+  const handleSubmit = () => {
+    // ensure all questions are answered
+    if (Object.keys(answers).length === questions.length) {
+      callback(answers);
+    }
+  };
 
   const questions = [
     {
@@ -65,20 +75,20 @@ const MovieForm = ({ username, password, confirmPassword }) => {
   ];
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {questions.map((question, index) => (
         <Question
           key={index}
           question={question.question}
           choices={question.choices}
+          selected={answers[index]}
           onPress={(choice) => setAnswers({ ...answers, [index]: choice })}
         />
       ))}
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
         <Text style={styles.submitButtonText}>Submit</Text>
       </TouchableOpacity>
-      <Text style={styles.answersText}>{JSON.stringify(answers)}</Text>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -100,6 +110,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginBottom: 10,
   },
+  selectedButton: {
+    backgroundColor: "#1DA1F2",
+  },
+
   choiceText: {
     fontSize: 16,
   },

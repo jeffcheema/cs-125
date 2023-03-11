@@ -44,7 +44,13 @@ export function AuthProvider({ children }) {
     }
   };
 
-  let signUp = async ({ name, username, password, confirmPassword }) => {
+  let signUp = async ({
+    name,
+    username,
+    password,
+    confirmPassword,
+    moviePreferences,
+  }) => {
     // check if the username is already in sync storage
     if (username === "" || password === "" || name === "") {
       throw new Error("All fields are required");
@@ -60,7 +66,7 @@ export function AuthProvider({ children }) {
 
     await AsyncStorage.setItem(
       username,
-      JSON.stringify({ name, username, password })
+      JSON.stringify({ name, username, password, moviePreferences })
     );
     await login({ username, password });
     return true;

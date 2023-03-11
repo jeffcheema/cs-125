@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { useAuth } from "../Providers/AuthProvider";
-import MovieForm from "./MovieForm"
+import MovieForm from "./MovieForm";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -12,72 +12,93 @@ export default function SignUp() {
   const [error, setError] = useState("");
   const [showMovieForm, setShowMovieForm] = useState(0);
   const { signUp: signUpCallback } = useAuth();
+  const [moviePreferences, setMoviePreferences] = useState({});
 
   const changeScreens = () => {
-    setShowMovieForm(1)
-  }
+    if ([name, password, username, confirmPassword].includes([""])) {
+      setError("All fields are required");
+      return;
+    } else if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    } else if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    setShowMovieForm(1);
+  };
+  const signUpWithPrefernces = () => {
+    signUpCallback({
+      name,
+      username,
+      password,
+      confirmPassword,
+      moviePreferences,
+    });
+  };
 
   return (
     <>
-    {showMovieForm == 0 && (
-      <View style={styles.container} styler>
-      <Text style={styles.header}>
-        <Text style={styles.blue}>MOVIE</Text>MATCHR SIGN UP
-      </Text>
-      <Text style={styles.label}>
-        Full<Text style={styles.blue}>Name</Text>
-      </Text>
-      <TextInput
-        style={styles.input}
-        value={name}
-        onChangeText={setName}
-        placeholder="Bob Ross"
-      />
-      <Text style={styles.label}>
-        User<Text style={styles.blue}>name</Text>
-      </Text>
-      <TextInput
-        style={styles.input}
-        value={username}
-        onChangeText={setUsername}
-        placeholder="Bob Ross"
-      />
+      {showMovieForm == 0 && (
+        <View style={styles.container} styler>
+          <Text style={styles.header}>
+            <Text style={styles.blue}>MOVIE</Text>MATCHR SIGN UP
+          </Text>
+          <Text style={styles.label}>
+            Full<Text style={styles.blue}>Name</Text>
+          </Text>
+          <TextInput
+            style={styles.input}
+            value={name}
+            onChangeText={setName}
+            placeholder="Bob Ross"
+          />
+          <Text style={styles.label}>
+            User<Text style={styles.blue}>name</Text>
+          </Text>
+          <TextInput
+            style={styles.input}
+            value={username}
+            onChangeText={setUsername}
+            placeholder="Bob Ross"
+          />
 
-      <Text style={styles.label}>
-        Pass<Text style={styles.blue}>word</Text>
-      </Text>
-      <TextInput
-        style={styles.input}
-        value={password}
-        onChangeText={setPassword}
-        placeholder="Password"
-      />
-      <Text style={styles.label}>
-        Confirm <Text style={styles.blue}>Password</Text>
-      </Text>
-      <TextInput
-        style={styles.input}
-        value={confirmPassword}
-        onChangeText={setConfirmPassword}
-        placeholder="Password"
-      />
-      <Text style={styles.error}>{error}</Text>
-      <Button
-        style={styles.signup}
-        title="signup"
-        color="#1DA1F2"
-        onPress={changeScreens}
-      />
-      <StatusBar style="auto" />
-    </View>
-    )}
-    {showMovieForm == 1 && (
-      <MovieForm 
-        username = {username}
-        password = {password}
-        confirmPassword = {confirmPassword}
-      />
-    )}
+          <Text style={styles.label}>
+            Pass<Text style={styles.blue}>word</Text>
+          </Text>
+          <TextInput
+            style={styles.input}
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Password"
+          />
+          <Text style={styles.label}>
+            Confirm <Text style={styles.blue}>Password</Text>
+          </Text>
+          <TextInput
+            style={styles.input}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            placeholder="Password"
+          />
+          <Text style={styles.error}>{error}</Text>
+          <Button
+            style={styles.signup}
+            title="signup"
+            color="#1DA1F2"
+            onPress={changeScreens}
+          />
+          <StatusBar style="auto" />
+        </View>
+      )}
+      {showMovieForm == 1 && (
+        <MovieForm
+          moviePreferences={moviePreferences}
+          setMoviePreferences={setMoviePreferences}
+          callback={signUpWithPrefernces}
+        />
+      )}
     </>
   );
 }
