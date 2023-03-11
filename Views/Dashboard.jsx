@@ -9,11 +9,11 @@ const Dashboard = () => {
   const getGenres = async (id) => {
     const options = {
       method: 'GET',
-      url: 'https://imdb8.p.rapidapi.com/title/get-genres',
-      params: {tconst: id },
+      url: 'https://online-movie-database.p.rapidapi.com/title/get-genres',
+      params: {tconst: 'tt0944947'},
       headers: {
-        'X-RapidAPI-Key': '90224ad231mshaff18bd567df6d8p15939fjsn3c6d59f23d8f',
-        'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
+        'X-RapidAPI-Key': 'c0c7ba7cc6msh72591dccfc3e7e7p197fb8jsn98662c20989a',
+        'X-RapidAPI-Host': 'online-movie-database.p.rapidapi.com'
       }
     };
     
