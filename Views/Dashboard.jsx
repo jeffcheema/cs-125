@@ -29,7 +29,7 @@ const Dashboard = () => {
   const getMovies = async () => {
     const config = {
       params: {
-        n: 10,
+        n: 4,
       },
       headers: {
         client: "MOVI_162",
@@ -45,10 +45,21 @@ const Dashboard = () => {
       .get("https://api-gate2.movieglu.com/filmsNowShowing", config)
       .then((response) => {
         if (response) {
+          console.log('movies:');
           setMovies(response.data.films);
-          const genres = response.data.films.map(movie => movie.imdb_title_id);
+          console.log(response.data.films);
+          const genres = response.data.films.map(async movie => {
+            const result = await getGenres(movie.imdb_title_id);
+            // console.log('result:');
+            // console.log(result);
+            // return result;
+          });
           console.log('genres:');
           console.log(genres);
+          // const titleIDs = response.data.films.map(movie => movie.imdb_title_id);
+          // console.log('titleIDs:');
+          // console.log(titleIDs);
+          // const genres = titleIDs.map(e => getGenres());
         }
       });
   };
