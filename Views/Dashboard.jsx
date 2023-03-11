@@ -33,14 +33,14 @@ const Dashboard = () => {
     });
 
     movies.filter(movie => {
-      if (temperature < 60) {
-        if (!currentUser.weatherPreference && movie.rating !== 'PG-13' && movie.rating !== 'R') {
+      if (temperature > 60) {
+        if (!currentUser.weatherPreference && (movie.rating !== 'PG-13' || movie.rating !== 'R')) {
           return true;
         } else {
           return false;
         }
       } else {
-        if (!currentUser.weatherPreference && movie.rating == 'PG-13' && movie.rating == 'R') {
+        if (currentUser.weatherPreference && (movie.rating === 'PG-13' || movie.rating === 'R')) {
           return true;
         } else {
           return false;
