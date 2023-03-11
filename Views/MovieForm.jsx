@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const Question = ({ question, choices, onPress }) => {
   return (
@@ -9,7 +9,8 @@ const Question = ({ question, choices, onPress }) => {
         <TouchableOpacity
           key={index}
           style={styles.choiceButton}
-          onPress={() => onPress(choice)}>
+          onPress={() => onPress(choice)}
+        >
           <Text style={styles.choiceText}>{choice}</Text>
         </TouchableOpacity>
       ))}
@@ -17,18 +18,50 @@ const Question = ({ question, choices, onPress }) => {
   );
 };
 
-const MovieForm = () => {
+const handleSubmit = async () => {
+  try {
+    await signUpCallback({ username, password, confirmPassword });
+  } catch (error) {
+    setError(error.message);
+  }
+};
+
+const MovieForm = ({ username, password, confirmPassword }) => {
   const [answers, setAnswers] = useState({});
 
   const questions = [
     {
-      question: 'What is your favorite movie genre?',
-      choices: ['Action', 'Comedy', '']
+      question: "What is your favorite movie genre?",
+      choices: [
+        "Action",
+        "Adventure",
+        "Animation",
+        "Comedy",
+        "Crime",
+        "Documentary",
+        "Drama",
+        "Family",
+        "Fantasy",
+        "Historical",
+        "Horror",
+        "Musical",
+        "Mystery",
+        "Romance",
+        "Science fiction",
+        "Sports",
+        "Thriller",
+        "War",
+        "Western",
+      ],
     },
     {
-      question: 'Do you prefer to watch movies in English or with subtitles?',
-      choices: ['English', 'Subtitles']
-    }
+      question: "Do you prefer to watch movies at home or in the theater?",
+      choices: ["Home", "Theater"],
+    },
+    {
+      question: "Do you prefer to watch movies in English or with subtitles?",
+      choices: ["English", "Subtitles"],
+    },
   ];
 
   return (
@@ -38,9 +71,12 @@ const MovieForm = () => {
           key={index}
           question={question.question}
           choices={question.choices}
-          onPress={choice => setAnswers({ ...answers, [index]: choice })}
+          onPress={(choice) => setAnswers({ ...answers, [index]: choice })}
         />
       ))}
+      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+        <Text style={styles.submitButtonText}>Submit</Text>
+      </TouchableOpacity>
       <Text style={styles.answersText}>{JSON.stringify(answers)}</Text>
     </View>
   );
@@ -48,29 +84,40 @@ const MovieForm = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20
+    padding: 20,
   },
   questionContainer: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   questionText: {
     fontSize: 18,
-    marginBottom: 10
+    marginBottom: 10,
   },
   choiceButton: {
     padding: 10,
-    backgroundColor: 'lightgray',
+    backgroundColor: "lightgray",
     borderRadius: 5,
     marginRight: 10,
-    marginBottom: 10
+    marginBottom: 10,
   },
   choiceText: {
-    fontSize: 16
+    fontSize: 16,
   },
   answersText: {
     marginTop: 20,
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
+  submitButton: {
+    backgroundColor: "#1DA1F2",
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  submitButtonText: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center",
+  },
 });
 
 export default MovieForm;

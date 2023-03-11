@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { useAuth } from "../Providers/AuthProvider";
+import MovieForm from "./MovieForm"
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -9,17 +10,17 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [showMovieForm, setShowMovieForm] = useState(0);
   const { signUp: signUpCallback } = useAuth();
 
-  const handleSignUp = async () => {
-    try {
-      await signUpCallback({ username, password, confirmPassword });
-    } catch (error) {
-      setError(error.message);
-    }
-  };
+  const changeScreens = () => {
+    setShowMovieForm(1)
+  }
+
   return (
-    <View style={styles.container} styler>
+    <>
+    {showMovieForm == 0 && (
+      <View style={styles.container} styler>
       <Text style={styles.header}>
         <Text style={styles.blue}>MOVIE</Text>MATCHR SIGN UP
       </Text>
@@ -65,10 +66,19 @@ export default function SignUp() {
         style={styles.signup}
         title="signup"
         color="#1DA1F2"
-        onPress={handleSignUp}
+        onPress={changeScreens}
       />
       <StatusBar style="auto" />
     </View>
+    )}
+    {showMovieForm == 1 && (
+      <MovieForm 
+        username = {username}
+        password = {password}
+        confirmPassword = {confirmPassword}
+      />
+    )}
+    </>
   );
 }
 
