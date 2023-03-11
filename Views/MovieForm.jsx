@@ -65,8 +65,8 @@ const MovieForm = ({
       ],
     },
     {
-      question: "Do you prefer to watch movies at home or in the theater?",
-      choices: ["Home", "Theater"],
+      question: "When the weather is cold, do you prefer calm, feel-good movies or intense thrillers?",
+      choices: ["Calm, feel good films", "Intense thrillers"],
     },
     {
       question: "Do you prefer to watch movies in English or with subtitles?",
