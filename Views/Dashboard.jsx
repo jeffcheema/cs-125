@@ -65,7 +65,7 @@ const Dashboard = () => {
   const getMovies = async () => {
     const config = {
       params: {
-        n: 10,
+        n: 100,
       },
       headers: {
         client: "MOVI_162",
