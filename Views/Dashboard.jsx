@@ -12,7 +12,7 @@ const Dashboard = () => {
       url: 'https://online-movie-database.p.rapidapi.com/title/get-genres',
       params: {tconst: 'tt0944947'},
       headers: {
-        'X-RapidAPI-Key': 'c0c7ba7cc6msh72591dccfc3e7e7p197fb8jsn98662c20989a',
+        'X-RapidAPI-Key': 'c58c0e4283msh9ac479d0cdc4813p130dbbjsnf15e2636ad12',
         'X-RapidAPI-Host': 'online-movie-database.p.rapidapi.com'
       }
     };
@@ -50,9 +50,9 @@ const Dashboard = () => {
           console.log(response.data.films);
           const genres = response.data.films.map(async movie => {
             const result = await getGenres(movie.imdb_title_id);
-            // console.log('result:');
-            // console.log(result);
-            // return result;
+            console.log('result:');
+            console.log(result);
+            return result;
           });
           console.log('genres:');
           console.log(genres);
