@@ -17,7 +17,15 @@ const Question = ({ question, choices, onPress }) => {
   );
 };
 
-const MovieForm = () => {
+const handleSubmit = async () => {
+  try {
+    await signUpCallback({ username, password, confirmPassword });
+  } catch (error) {
+    setError(error.message);
+  }
+};
+
+const MovieForm = ({ username, password, confirmPassword }) => {
   const [answers, setAnswers] = useState({});
 
   const questions = [
@@ -45,6 +53,12 @@ const MovieForm = () => {
           onPress={choice => setAnswers({ ...answers, [index]: choice })}
         />
       ))}
+      <TouchableOpacity
+        style={styles.submitButton}
+        onPress={handleSubmit}
+      >
+        <Text style={styles.submitButtonText}>Submit</Text>
+      </TouchableOpacity>
       <Text style={styles.answersText}>{JSON.stringify(answers)}</Text>
     </View>
   );
@@ -74,6 +88,17 @@ const styles = StyleSheet.create({
   answersText: {
     marginTop: 20,
     fontSize: 16
+  },
+  submitButton: {
+    backgroundColor: '#1DA1F2',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20
+  },
+  submitButtonText: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center'
   }
 });
 
