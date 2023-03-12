@@ -76,20 +76,23 @@ const MovieForm = ({
   ];
 
   return (
-    <ScrollView style={styles.container}>
-      {questions.map((question, index) => (
-        <Question
-          key={index}
-          question={question.question}
-          choices={question.choices}
-          selected={answers[index]}
-          onPress={(choice) => setAnswers({ ...answers, [index]: choice })}
-        />
-      ))}
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={styles.submitButtonText}>Submit</Text>
-      </TouchableOpacity>
-    </ScrollView>
+    <View style={{flex: 1}}>
+      <ScrollView style={styles.container}>
+        {questions.map((question, index) => (
+          <Question
+            key={index}
+            question={question.question}
+            choices={question.choices}
+            selected={answers[index]}
+            onPress={(choice) => setAnswers({ ...answers, [index]: choice })}
+          />
+        ))}
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.submitButtonText}>Submit</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
+    
   );
 };
 

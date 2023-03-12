@@ -115,12 +115,10 @@ const Dashboard = () => {
 };
 const styles = StyleSheet.create({
   titleText: {
+    padding: 30,
     color: 'black',
+    fontSize: 25,
     fontWeight: 'bold',
-    fontSize: 30,
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
   container: {
     flex: 1,
