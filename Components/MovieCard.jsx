@@ -12,9 +12,6 @@ const MovieCard = ({ title, synopsis, image }) => {
         <Image source={{ uri: image }} style={styles.image} />
         <Paragraph>{synopsis}</Paragraph>
       </Card.Content>
-      <Card.Actions>
-        <Button title="Add to Favourites"></Button>
-      </Card.Actions>
     </Card>
   );
 };
