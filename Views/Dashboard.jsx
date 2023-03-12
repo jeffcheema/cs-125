@@ -92,6 +92,7 @@ const Dashboard = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.titleText}>Your Recommendations:</Text>
       {movies && (
         <FlatList
           data={movies.slice(0, 3)}
@@ -113,6 +114,14 @@ const Dashboard = () => {
   );
 };
 const styles = StyleSheet.create({
+  titleText: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 30,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
     flex: 1,
     justifyContent: "center",
