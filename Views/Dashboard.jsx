@@ -69,11 +69,11 @@ const Dashboard = () => {
       },
       headers: {
         client: "MOVI_162",
-        "x-api-key": "Y38wpjAaP566ppQwom80J207PBbha4Da2neKmR5S",
-        authorization: "Basic TU9WSV8xNjJfWFg6eDFjbndocWttVXFx",
-        territory: "XX",
+        "x-api-key": "mAVMfqzWZs7Wv7Mp1w52I3421mWUdXUR7gwDtTJa",
+        authorization: "Basic TU9WSV8xNjI6bjlkWU9JS0dpSGtP",
+        territory: "US",
         "api-version": "v200",
-        geolocation: "-22.0; 14.0",
+        geolocation: "33.6846; 117.8265",
         "device-datetime": new Date().toISOString(),
       },
     };
@@ -81,6 +81,7 @@ const Dashboard = () => {
       .get("https://api-gate2.movieglu.com/filmsNowShowing", config)
       .then((response) => {
         if (response) {
+          console.log(response.data.films);
           setMovies(response?.data?.films);
         }
       });
