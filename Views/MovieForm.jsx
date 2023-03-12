@@ -65,7 +65,8 @@ const MovieForm = ({
       ],
     },
     {
-      question: "When the weather is cold, do you prefer calm, feel-good movies or intense thrillers?",
+      question:
+        "When the weather is cold, do you prefer calm, feel-good movies or intense thrillers?",
       choices: ["Calm, feel good films", "Intense thrillers"],
     },
     {
