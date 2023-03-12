@@ -92,7 +92,6 @@ const Dashboard = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.titleText}>Your Recommendations:</Text>
       {movies && (
         <FlatList
           data={movies.slice(0, 3)}
