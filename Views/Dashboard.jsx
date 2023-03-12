@@ -65,7 +65,7 @@ const Dashboard = () => {
   const getMovies = async () => {
     const config = {
       params: {
-        n: 10,
+        n: 50,
       },
       headers: {
         client: "MOVI_162",
@@ -81,8 +81,9 @@ const Dashboard = () => {
       .get("https://api-gate2.movieglu.com/filmsNowShowing", config)
       .then((response) => {
         if (response) {
-          console.log(response?.data?.films);
-          setMovies(response?.data?.films);
+          const filteredResponse = response.data.films.slice(3,6);
+          console.log(filteredResponse);
+          setMovies(filteredResponse);
         }
       });
   };
@@ -99,7 +100,7 @@ const Dashboard = () => {
           renderItem={({ index, item }) => {
             return (
               <MovieCard
-                key={item.film_name + new Date().toDateString}
+                key={Math.random()}
                 id={index}
                 title={item.film_name}
                 synopsis={item.synopsis_long}
