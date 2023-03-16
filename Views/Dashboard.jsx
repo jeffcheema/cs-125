@@ -96,7 +96,7 @@ const Dashboard = () => {
     <SafeAreaView style={styles.container}>
       {movies && (
         <FlatList
-          data={movies}
+          data={movies.slice(0,3)}
           renderItem={({ index, item }) => {
             return (
               <MovieCard
