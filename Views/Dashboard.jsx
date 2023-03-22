@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { SafeAreaView, StyleSheet, Text, FlatList } from "react-native";
 import MovieCard from "../Components/MovieCard";
+import zipcode from '../utils/Zipcode';
 
 const Dashboard = () => {
   const [movies, setMovies] = useState([]);
@@ -32,7 +33,7 @@ const Dashboard = () => {
   const filterByWeather = async () => {
     temperature = await axios.get("http://api.weatherapi.com/v1", {
       key: "7c0d315f79674727806182811231103",
-      q: 92617,
+      q: zipcode,
     });
 
     movies.filter((movie) => {
@@ -60,7 +61,16 @@ const Dashboard = () => {
     console.log(movies);
   };
 
-  const filterByGenre = () => {};
+  const sortByGenre = () => {
+    const genreList = movies.map(movie => getGenres(movie.imdb_title_id));
+    const overlappingCount = genreList.map(genres => {
+      const gSet = new Set(genres);
+      const userPreferences = new Set(currentUser.preferredGenres);
+      const intersect = new Set([...gSet].filter(i => userPreferences.has(i)));
+      return intersect.length;
+    });
+    movies.sort((a, b) => intersect.indexOf(b) - intersect.indexOf(a));
+  };
 
   const getMovies = async () => {
     const config = {
@@ -73,7 +83,7 @@ const Dashboard = () => {
         authorization: "Basic TU9WSV8xNjI6bjlkWU9JS0dpSGtP",
         territory: "US",
         "api-version": "v200",
-        geolocation: "33.6846; 117.8265",
+        geolocation: "40.71; 74.01",
         "device-datetime": new Date().toISOString(),
       },
     };
@@ -90,13 +100,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     getMovies();
+    filterByWeather();
+    sortByGenre();
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       {movies && (
         <FlatList
-          data={movies}
+          data={movies.slice(0,3)}
           renderItem={({ index, item }) => {
             return (
               <MovieCard

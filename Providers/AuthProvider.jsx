@@ -49,7 +49,8 @@ export function AuthProvider({ children }) {
     username,
     password,
     confirmPassword,
-    moviePreferences,
+    preferredGenres,
+    weatherPreference
   }) => {
     // check if the username is already in sync storage
     if (username === "" || password === "" || name === "") {
@@ -66,7 +67,7 @@ export function AuthProvider({ children }) {
 
     await AsyncStorage.setItem(
       username,
-      JSON.stringify({ name, username, password, moviePreferences })
+      JSON.stringify({ name, username, password, preferredGenres, weatherPreference })
     );
     await login({ username, password });
     return true;
