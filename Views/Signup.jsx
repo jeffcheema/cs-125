@@ -13,6 +13,7 @@ export default function SignUp() {
   const [showMovieForm, setShowMovieForm] = useState(0);
   const { signUp: signUpCallback } = useAuth();
   const [moviePreferences, setMoviePreferences] = useState({});
+  const [weatherPreference, setWeatherPreference] = useState({});
 
   const changeScreens = () => {
     if ([name, password, username, confirmPassword].includes([""])) {
@@ -35,6 +36,7 @@ export default function SignUp() {
       password,
       confirmPassword,
       moviePreferences,
+      weatherPreference,
     });
   };
 
